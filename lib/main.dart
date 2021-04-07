@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:security_app/startPage.dart';
+import 'package:security_app/pages/startPage.dart';
+import 'package:security_app/pages/mainPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,6 +15,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      routes: <String, WidgetBuilder>{
+        '/pages/mainPage': (BuildContext context) => MainPage(),
+      },
       home: StartPage(),
     );
   }
