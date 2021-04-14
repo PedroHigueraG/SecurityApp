@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 Color azulClaro = new Color(0xff5ac7ff);
@@ -36,105 +35,104 @@ class _StartPageState extends State<StartPage>
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: negroAzul,
-        body: Container(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/img/chip.png"),
-                        fit: BoxFit.cover)),
+        body: Stack(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/img/chip.png'),
+                      fit: BoxFit.cover)
+                      ),
+            ),
+            FadeTransition(
+              opacity: _animation,
+              child: Container(
+                child: Image(image: AssetImage('assets/img/Trazado.png')),
+                alignment: Alignment.bottomCenter,
               ),
-              FadeTransition(
-                opacity: _animation,
-                child: Container(
-                  child: Image(image: AssetImage('assets/img/Trazado.png')),
-                  alignment: Alignment.bottomCenter,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                SlideTransition(
+                  position: Tween<Offset>(
+                    begin: Offset(0,-0.3),
+                    end: Offset.zero
+                     ).animate(_animation),
+                  child: FadeTransition(
+                    opacity: _animation,
+                    child: Text(
+                      'BIENVENIDOS',
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: azulClaro),
+                    ),
+                  ),
                 ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  SlideTransition(
-                    position: Tween<Offset>(
-                      begin: Offset(0,-0.3),
-                      end: Offset.zero
-                       ).animate(_animation),
-                    child: FadeTransition(
-                      opacity: _animation,
+                SlideTransition(
+                  position: Tween<Offset>(
+                    begin: Offset(0,-0.2),
+                    end: Offset.zero
+                     ).animate(_animation),
+                  child: FadeTransition(
+                    opacity: _animation,
+                    child: Center(
+                      child: Image.asset(
+                        'assets/img/icon.png',
+                        width: 200,
+                        height: 200,
+                      ),
+                    ),
+                  ),
+                ),
+                SlideTransition(
+                  position: Tween<Offset>(
+                    begin: Offset(0,0.3),
+                    end: Offset.zero
+                     ).animate(_animation),
+                  child: FadeTransition(
+                    opacity: _animation,
+                    child: Container(
+                      margin: EdgeInsets.all(20),
                       child: Text(
-                        'BIENVENIDOS',
+                        '¡La mejor manera de monitorear tu hogar!',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: azulClaro),
-                      ),
-                    ),
-                  ),
-                  SlideTransition(
-                    position: Tween<Offset>(
-                      begin: Offset(0,-0.2),
-                      end: Offset.zero
-                       ).animate(_animation),
-                    child: FadeTransition(
-                      opacity: _animation,
-                      child: Center(
-                        child: Image.asset(
-                          'assets/img/icon.png',
-                          width: 200,
-                          height: 200,
+                          fontSize: 24,
+                          color: azulClaro,
                         ),
                       ),
                     ),
                   ),
-                  SlideTransition(
-                    position: Tween<Offset>(
-                      begin: Offset(0,0.3),
-                      end: Offset.zero
-                       ).animate(_animation),
-                    child: FadeTransition(
-                      opacity: _animation,
-                      child: Container(
-                        margin: EdgeInsets.all(20),
-                        child: Text(
-                          '¡La mejor manera de monitorear tu hogar!',
-                          textAlign: TextAlign.center,
+                ),
+                SlideTransition(
+                  position: Tween<Offset>(
+                    begin: Offset(0,0.8),
+                    end: Offset.zero
+                     ).animate(_animation),
+                  child: FadeTransition(
+                    opacity: _animation,
+                    child: MaterialButton(
+                      minWidth: 150.0,
+                      height: 60.0,
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/pages/mainPage');
+                      },
+                      color: azulClaro,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(33.0)),
+                      child: Text('Iniciar',
                           style: TextStyle(
-                            fontSize: 24,
-                            color: azulClaro,
-                          ),
-                        ),
-                      ),
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: azulOscuro)),
                     ),
                   ),
-                  SlideTransition(
-                    position: Tween<Offset>(
-                      begin: Offset(0,0.8),
-                      end: Offset.zero
-                       ).animate(_animation),
-                    child: FadeTransition(
-                      opacity: _animation,
-                      child: MaterialButton(
-                        minWidth: 150.0,
-                        height: 60.0,
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/pages/mainPage');
-                        },
-                        color: azulClaro,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(33.0)),
-                        child: Text('Iniciar',
-                            style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: azulOscuro)),
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+                ),
+              ],
+            )
+          ],
         ));
   }
 }
