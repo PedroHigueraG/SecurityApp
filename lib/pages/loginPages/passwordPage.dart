@@ -118,7 +118,26 @@ class _PasswordPageState extends State<PasswordPage>  with SingleTickerProviderS
                                 fontWeight: FontWeight.bold,
                                 color: azulOscuro)),
                       ),
-                    )
+                    ),
+                    Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("¿La recuperaste? "),
+                              GestureDetector(
+                                child: Text(
+                                  'Iniciar sesión',
+                                  style: TextStyle(color: azulClaro),
+                                ),
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, '/pages/loginPage');
+                                },
+                              )
+                            ],
+                          ),
+                        ),
                   ],
                 ),
               )
