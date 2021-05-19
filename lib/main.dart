@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:security_app/pages/startPage.dart';
-import 'package:security_app/pages/loginPage.dart';
-import 'package:security_app/pages/userPage.dart';
+import 'package:security_app/pages/loginPages/loginPage.dart';
+import 'package:security_app/pages/loginPages/singupPage.dart';
+import 'package:security_app/pages/loginPages/passwordPage.dart';
+import 'package:security_app/pages/userPages/userPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +20,9 @@ class MyApp extends StatelessWidget {
       ),
       routes: <String, WidgetBuilder>{
         '/pages/loginPage': (BuildContext context) => LoginPage(),
-        '/pages/userPage': (BuildContext context) => UserPage()
+        '/pages/userPage': (BuildContext context) => UserPage(),
+        '/pages/singupPage': (BuildContext context) => SingupPage(),
+        '/pages/passPage': (BuildContext context) => PasswordPage(),
       },
       home: StartPage(),
     );

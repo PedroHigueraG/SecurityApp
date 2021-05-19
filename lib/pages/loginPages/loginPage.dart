@@ -119,7 +119,15 @@ class _LoginPageState extends State<LoginPage>
                           ),
                         ),
                       ),
-                      Text('¿Olvidaste la contraseña?'),
+                      GestureDetector(
+                        child: Text(
+                          '¿Olvidaste la contraseña?',
+                          style: TextStyle(color: azulClaro),
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/pages/passPage');
+                        },
+                      ),
                     ],
                   ),
                   Column(
@@ -141,7 +149,22 @@ class _LoginPageState extends State<LoginPage>
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Text("¿Nuevo usuario? Regístrate"),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("¿Nuevo usuario? "),
+                            GestureDetector(
+                              child: Text(
+                                'Regístrate',
+                                style: TextStyle(color: azulClaro),
+                              ),
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, '/pages/singupPage');
+                              },
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   )
