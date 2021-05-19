@@ -75,7 +75,7 @@ class _PasswordPageState extends State<PasswordPage>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Reestablecer contraseña',
+                      'Restablecer contraseña',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
@@ -116,7 +116,7 @@ class _PasswordPageState extends State<PasswordPage>
                         color: azulClaro,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(33.0)),
-                        child: Text('Reestablecer',
+                        child: Text('Restablecer',
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
