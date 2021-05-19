@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:security_app/pages/startPage.dart';
 
-class MainPage extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   @override
-  _MainPageState createState() => _MainPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _MainPageState extends State<MainPage>
+class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
@@ -128,7 +128,7 @@ class _MainPageState extends State<MainPage>
                         minWidth: 150.0,
                         height: 60.0,
                         onPressed: () {
-                          Navigator.pushNamed(context, '/pages/mainPage');
+                          Navigator.pushNamed(context, '/pages/userPage');
                         },
                         color: azulClaro,
                         shape: RoundedRectangleBorder(

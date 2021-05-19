@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:security_app/pages/startPage.dart';
 import 'package:security_app/pages/loginPage.dart';
+import 'package:security_app/pages/userPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: <String, WidgetBuilder>{
-        '/pages/mainPage': (BuildContext context) => MainPage(),
+        '/pages/loginPage': (BuildContext context) => LoginPage(),
+        '/pages/userPage': (BuildContext context) => UserPage()
       },
       home: StartPage(),
     );

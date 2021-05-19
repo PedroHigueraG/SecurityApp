@@ -117,7 +117,7 @@ class _StartPageState extends State<StartPage>
                       minWidth: 150.0,
                       height: 60.0,
                       onPressed: () {
-                        Navigator.pushNamed(context, '/pages/mainPage');
+                        Navigator.pushReplacementNamed(context, '/pages/loginPage');
                       },
                       color: azulClaro,
                       shape: RoundedRectangleBorder(
