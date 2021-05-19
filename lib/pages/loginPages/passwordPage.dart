@@ -9,12 +9,13 @@ class PasswordPage extends StatefulWidget {
   _PasswordPageState createState() => _PasswordPageState();
 }
 
-class _PasswordPageState extends State<PasswordPage>  with SingleTickerProviderStateMixin {
+class _PasswordPageState extends State<PasswordPage>
+    with SingleTickerProviderStateMixin {
   TextEditingController emailController = new TextEditingController();
-    AnimationController _controller;
+  AnimationController _controller;
   Animation<double> _animation;
 
-    @override
+  @override
   void initState() {
     super.initState();
     _controller =
@@ -28,12 +29,13 @@ class _PasswordPageState extends State<PasswordPage>  with SingleTickerProviderS
     _controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Column(
             children: [
               Stack(
                 alignment: AlignmentDirectional.topCenter,
@@ -50,9 +52,9 @@ class _PasswordPageState extends State<PasswordPage>  with SingleTickerProviderS
                   Positioned(
                     top: 65,
                     child: SlideTransition(
-                      position:
-                          Tween<Offset>(begin: Offset(0, -0.2), end: Offset.zero)
-                              .animate(_animation),
+                      position: Tween<Offset>(
+                              begin: Offset(0, -0.2), end: Offset.zero)
+                          .animate(_animation),
                       child: FadeTransition(
                         opacity: _animation,
                         child: Center(
@@ -79,9 +81,13 @@ class _PasswordPageState extends State<PasswordPage>  with SingleTickerProviderS
                           fontSize: 25,
                           color: azulOscuro),
                     ),
-                    Center(child: Padding(
+                    Center(
+                        child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Text('Ingrese su correo electrónico para enviarle los pasos',style: TextStyle(color: azulOscuro),),
+                      child: Text(
+                        'Ingrese su correo electrónico para enviarle los pasos',
+                        style: TextStyle(color: azulOscuro),
+                      ),
                     )),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -106,9 +112,7 @@ class _PasswordPageState extends State<PasswordPage>  with SingleTickerProviderS
                       child: MaterialButton(
                         minWidth: 150.0,
                         height: 60.0,
-                        onPressed: () {
-                          
-                        },
+                        onPressed: () {},
                         color: azulClaro,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(33.0)),
@@ -120,30 +124,28 @@ class _PasswordPageState extends State<PasswordPage>  with SingleTickerProviderS
                       ),
                     ),
                     Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("¿La recuperaste? "),
-                              GestureDetector(
-                                child: Text(
-                                  'Iniciar sesión',
-                                  style: TextStyle(color: azulClaro),
-                                ),
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, '/pages/loginPage');
-                                },
-                              )
-                            ],
-                          ),
-                        ),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("¿La recuperaste? "),
+                          GestureDetector(
+                            child: Text(
+                              'Iniciar sesión',
+                              style: TextStyle(color: azulClaro),
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/pages/loginPage');
+                            },
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               )
             ],
           ),
-      )
-    );
+        ));
   }
 }
