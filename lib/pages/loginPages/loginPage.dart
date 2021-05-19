@@ -33,50 +33,53 @@ class _LoginPageState extends State<LoginPage>
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
-          children: [
-            Stack(
-              alignment: AlignmentDirectional.topCenter,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: (MediaQuery.of(context).size.width) * 0.656,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/img/Security.png'),
-                        fit: BoxFit.fitWidth),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stack(
+                alignment: AlignmentDirectional.topCenter,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: (MediaQuery.of(context).size.width) * 0.656,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/img/Security.png'),
+                          fit: BoxFit.fitWidth),
+                    ),
                   ),
-                ),
-                Positioned(
-                  top: 65,
-                  child: SlideTransition(
-                    position:
-                        Tween<Offset>(begin: Offset(0, -0.2), end: Offset.zero)
-                            .animate(_animation),
-                    child: FadeTransition(
-                      opacity: _animation,
-                      child: Center(
-                        child: Image.asset(
-                          'assets/img/icon.png',
-                          width: 120,
-                          height: 120,
+                  Positioned(
+                    top: 65,
+                    child: SlideTransition(
+                      position:
+                          Tween<Offset>(begin: Offset(0, -0.2), end: Offset.zero)
+                              .animate(_animation),
+                      child: FadeTransition(
+                        opacity: _animation,
+                        child: Center(
+                          child: Image.asset(
+                            'assets/img/icon.png',
+                            width: 120,
+                            height: 120,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-              ],
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  )
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'INICIAR SESIÓN',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                        color: azulOscuro),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
+                    child: Text(
+                      'INICIAR SESIÓN',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          color: azulOscuro),
+                    ),
                   ),
                   Column(
                     children: [
@@ -130,48 +133,51 @@ class _LoginPageState extends State<LoginPage>
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      MaterialButton(
-                        minWidth: 150.0,
-                        height: 60.0,
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/pages/userPage');
-                        },
-                        color: azulClaro,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(33.0)),
-                        child: Text('Iniciar sesión',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: azulOscuro)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("¿Nuevo usuario? "),
-                            GestureDetector(
-                              child: Text(
-                                'Regístrate',
-                                style: TextStyle(color: azulClaro),
-                              ),
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, '/pages/singupPage');
-                              },
-                            )
-                          ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Column(
+                      children: [
+                        MaterialButton(
+                          minWidth: 150.0,
+                          height: 60.0,
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/pages/userPage');
+                          },
+                          color: azulClaro,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(33.0)),
+                          child: Text('Iniciar sesión',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: azulOscuro)),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("¿Nuevo usuario? "),
+                              GestureDetector(
+                                child: Text(
+                                  'Regístrate',
+                                  style: TextStyle(color: azulClaro),
+                                ),
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, '/pages/singupPage');
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 ],
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ));
   }
 }
