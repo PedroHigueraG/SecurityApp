@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:security_app/pages/startPage.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -10,6 +11,8 @@ class _MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
+  TextEditingController userController = new TextEditingController();
+  TextEditingController passController = new TextEditingController();
 
   @override
   void initState() {
@@ -64,29 +67,87 @@ class _MainPageState extends State<MainPage>
                 )
               ],
             ),
-            Expanded(child:  Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-
-                Text(
-                  'INICIAR SESIÓN',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                ),
-                Text(
-                  'INICIAR SESIÓN',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                ),
-                Text(
-                  'INICIAR SESIÓN',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                ),
-                Text(
-                  'INICIAR SESIÓN',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                ),
-              ],
-            ),)
-           
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'INICIAR SESIÓN',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: azulOscuro),
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: TextField(
+                          controller: userController,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.people,
+                              color: azulOscuro,
+                            ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: azulOscuro)),
+                            hintText: 'Usuario',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: TextField(
+                          obscureText: true,
+                          enableSuggestions: false,
+                          autocorrect: false,
+                          controller: passController,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.lock_open,
+                              color: azulOscuro,
+                            ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: azulOscuro)),
+                            hintText: 'Contraseña',
+                          ),
+                        ),
+                      ),
+                      Text('¿Olvidaste la contraseña?'),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      MaterialButton(
+                        minWidth: 150.0,
+                        height: 60.0,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/pages/mainPage');
+                        },
+                        color: azulClaro,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(33.0)),
+                        child: Text('Iniciar sesión',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: azulOscuro)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Text("¿Nuevo usuario? Regístrate"),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
           ],
         ));
   }
