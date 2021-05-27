@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
+import 'package:security_app/controller/userHTTP.dart';
+import 'package:security_app/models/Usuario.dart';
 import 'package:security_app/pages/startPage.dart';
-
 
 class SingupPage extends StatefulWidget {
   SingupPage({Key key}) : super(key: key);
@@ -10,8 +13,8 @@ class SingupPage extends StatefulWidget {
   _SingupPageState createState() => _SingupPageState();
 }
 
-class _SingupPageState extends State<SingupPage> 
-      with SingleTickerProviderStateMixin {
+class _SingupPageState extends State<SingupPage>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
   TextEditingController userController = new TextEditingController();
@@ -21,7 +24,7 @@ class _SingupPageState extends State<SingupPage>
   TextEditingController passController = new TextEditingController();
   TextEditingController confirmPassController = new TextEditingController();
 
-    @override
+  @override
   void initState() {
     super.initState();
     _controller =
@@ -35,6 +38,7 @@ class _SingupPageState extends State<SingupPage>
     _controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,9 +61,9 @@ class _SingupPageState extends State<SingupPage>
                   Positioned(
                     top: 65,
                     child: SlideTransition(
-                      position:
-                          Tween<Offset>(begin: Offset(0, -0.2), end: Offset.zero)
-                              .animate(_animation),
+                      position: Tween<Offset>(
+                              begin: Offset(0, -0.2), end: Offset.zero)
+                          .animate(_animation),
                       child: FadeTransition(
                         opacity: _animation,
                         child: Center(
@@ -213,8 +217,27 @@ class _SingupPageState extends State<SingupPage>
                         MaterialButton(
                           minWidth: 150.0,
                           height: 60.0,
-                          onPressed: () {
-                            
+                          onPressed: () async {
+                            final user = Usuario(
+                                usuario: userController.text,
+                                password: passController.text,
+                                correo: mailController.text,
+                                direccion: addressController.text,
+                                telefono: phoneController.text);
+                            final res = await CreateUser.crearUsuario(user);
+                            if (res.statusCode == 200) {
+                              print("Creado correctamente");
+                              Navigator.pushNamed(context, '/pages/loginPage');
+                            } else {
+                              final data = json.decode(res.body);
+                              if (data['errors'] != null) {
+                                for (Map err in data['errors']) {
+                                  print(err['msg']);
+                                }
+                              } else {
+                                print(data);
+                              }
+                            }
                           },
                           color: azulClaro,
                           shape: RoundedRectangleBorder(

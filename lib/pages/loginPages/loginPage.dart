@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:security_app/controller/userHTTP.dart';
+import 'package:security_app/models/Usuario.dart';
 import 'package:security_app/pages/startPage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -51,9 +54,9 @@ class _LoginPageState extends State<LoginPage>
                   Positioned(
                     top: 65,
                     child: SlideTransition(
-                      position:
-                          Tween<Offset>(begin: Offset(0, -0.2), end: Offset.zero)
-                              .animate(_animation),
+                      position: Tween<Offset>(
+                              begin: Offset(0, -0.2), end: Offset.zero)
+                          .animate(_animation),
                       child: FadeTransition(
                         opacity: _animation,
                         child: Center(
@@ -140,8 +143,23 @@ class _LoginPageState extends State<LoginPage>
                         MaterialButton(
                           minWidth: 150.0,
                           height: 60.0,
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/pages/userPage');
+                          onPressed: () async {
+                            final user = Usuario(
+                                usuario: userController.text,
+                                password: passController.text);
+                            final res = await CreateUser.authUsuario(user);
+                            final data = json.decode(res.body);
+                            if (data['token'] != null) {
+                              Navigator.pushNamed(context, '/pages/userPage');
+                            } else {
+                              if (data['errors'] != null) {
+                                for (Map err in data['errors']) {
+                                  print(err['msg']);
+                                }
+                              } else {
+                                print(data['msg']);
+                              }
+                            }
                           },
                           color: azulClaro,
                           shape: RoundedRectangleBorder(
