@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:security_app/controller/userHTTP.dart';
 import 'package:security_app/models/Usuario.dart';
 import 'package:security_app/pages/startPage.dart';
+import 'package:security_app/storage/jwtstorage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -150,6 +151,7 @@ class _LoginPageState extends State<LoginPage>
                             final res = await CreateUser.authUsuario(user);
                             final data = json.decode(res.body);
                             if (data['token'] != null) {
+                              JsonStorage.saveToken(data['token']);
                               Navigator.pushNamed(context, '/pages/userPage');
                             } else {
                               if (data['errors'] != null) {

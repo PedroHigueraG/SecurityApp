@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:security_app/storage/jwtstorage.dart';
 
 Color azulClaro = new Color(0xff5ac7ff);
 Color azulOscuro = new Color(0xff0c3249);
@@ -21,8 +22,7 @@ class _StartPageState extends State<StartPage>
     _controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
-    Timer(Duration(milliseconds: 500),()=>_controller.forward());
-    
+    Timer(Duration(milliseconds: 500), () => _controller.forward());
   }
 
   @override
@@ -41,8 +41,7 @@ class _StartPageState extends State<StartPage>
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/img/chip.png'),
-                      fit: BoxFit.cover)
-                      ),
+                      fit: BoxFit.cover)),
             ),
             FadeTransition(
               opacity: _animation,
@@ -55,10 +54,9 @@ class _StartPageState extends State<StartPage>
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 SlideTransition(
-                  position: Tween<Offset>(
-                    begin: Offset(0,-0.3),
-                    end: Offset.zero
-                     ).animate(_animation),
+                  position:
+                      Tween<Offset>(begin: Offset(0, -0.3), end: Offset.zero)
+                          .animate(_animation),
                   child: FadeTransition(
                     opacity: _animation,
                     child: Text(
@@ -71,10 +69,9 @@ class _StartPageState extends State<StartPage>
                   ),
                 ),
                 SlideTransition(
-                  position: Tween<Offset>(
-                    begin: Offset(0,-0.2),
-                    end: Offset.zero
-                     ).animate(_animation),
+                  position:
+                      Tween<Offset>(begin: Offset(0, -0.2), end: Offset.zero)
+                          .animate(_animation),
                   child: FadeTransition(
                     opacity: _animation,
                     child: Center(
@@ -87,10 +84,9 @@ class _StartPageState extends State<StartPage>
                   ),
                 ),
                 SlideTransition(
-                  position: Tween<Offset>(
-                    begin: Offset(0,0.3),
-                    end: Offset.zero
-                     ).animate(_animation),
+                  position:
+                      Tween<Offset>(begin: Offset(0, 0.3), end: Offset.zero)
+                          .animate(_animation),
                   child: FadeTransition(
                     opacity: _animation,
                     child: Container(
@@ -107,17 +103,21 @@ class _StartPageState extends State<StartPage>
                   ),
                 ),
                 SlideTransition(
-                  position: Tween<Offset>(
-                    begin: Offset(0,0.8),
-                    end: Offset.zero
-                     ).animate(_animation),
+                  position:
+                      Tween<Offset>(begin: Offset(0, 0.8), end: Offset.zero)
+                          .animate(_animation),
                   child: FadeTransition(
                     opacity: _animation,
                     child: MaterialButton(
                       minWidth: 150.0,
                       height: 60.0,
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/pages/loginPage');
+                      onPressed: () async {
+                        if (await JsonStorage.authToken()) {
+                          Navigator.pushNamed(context, '/pages/userPage');
+                        } else {
+                          Navigator.pushReplacementNamed(
+                              context, '/pages/loginPage');
+                        }
                       },
                       color: azulClaro,
                       shape: RoundedRectangleBorder(

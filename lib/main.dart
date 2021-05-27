@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/pages/userPage': (BuildContext context) => UserPage(),
         '/pages/singupPage': (BuildContext context) => SingupPage(),
         '/pages/passPage': (BuildContext context) => PasswordPage(),
+        '/startPage': (BuildContext context) => StartPage(),
       },
       home: StartPage(),
     );
