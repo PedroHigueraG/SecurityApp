@@ -23,7 +23,6 @@ class JsonStorage {
     }
     final res = await CreateUser.authToken(token);
     final msg = json.decode(res.body)['msg'];
-    print(msg);
     if (msg == "auth") {
       return true;
     } else {
