@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage>
   Animation<double> _animation;
   TextEditingController userController = new TextEditingController();
   TextEditingController passController = new TextEditingController();
-
+  var mensaje = '';
   @override
   void initState() {
     super.initState();
@@ -84,6 +84,10 @@ class _LoginPageState extends State<LoginPage>
                           fontSize: 25,
                           color: azulOscuro),
                     ),
+                  ),
+                  Text(
+                    mensaje,
+                    style: TextStyle(color: Colors.red),
                   ),
                   Column(
                     children: [
@@ -155,10 +159,18 @@ class _LoginPageState extends State<LoginPage>
                               Navigator.pushNamed(context, '/pages/userPage');
                             } else {
                               if (data['errors'] != null) {
+                                var msj = '';
                                 for (Map err in data['errors']) {
+                                  msj += err['msg'];
                                   print(err['msg']);
                                 }
+                                setState(() {
+                                  mensaje = msj;
+                                });
                               } else {
+                                setState(() {
+                                  mensaje = data['msg'];
+                                });
                                 print(data['msg']);
                               }
                             }
