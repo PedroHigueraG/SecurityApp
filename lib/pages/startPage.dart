@@ -46,8 +46,9 @@ class _StartPageState extends State<StartPage>
             FadeTransition(
               opacity: _animation,
               child: Container(
-                child: Image(image: AssetImage('assets/img/Trazado.png')),
+                child: Image(image: AssetImage('assets/img/Trazado.png'),width: MediaQuery.of(context).copyWith().size.width,fit: BoxFit.cover,),
                 alignment: Alignment.bottomCenter,
+                
               ),
             ),
             Column(
