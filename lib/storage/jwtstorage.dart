@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:security_app/controller/userHTTP.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class JsonStorage {
@@ -15,7 +18,13 @@ class JsonStorage {
   static Future<bool> authToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString("jwt");
-    if (token != null) {
+    if (token == null) {
+      return false;
+    }
+    final res = await CreateUser.authToken(token);
+    final msg = json.decode(res.body)['msg'];
+    print(msg);
+    if (msg == "auth") {
       return true;
     } else {
       return false;
