@@ -10,8 +10,10 @@ class PrincipalPage extends StatefulWidget {
 class _PrincipalPageState extends State<PrincipalPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-       child: Center(child: Text('ola Principal')),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Principal'),
+      ),
     );
   }
 }
