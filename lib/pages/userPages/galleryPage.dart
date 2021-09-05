@@ -61,13 +61,42 @@ class _GalleryState extends State<Gallery> {
 
   @override
   Widget build(BuildContext context) {
+    if (loading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return GridView.builder(
         gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemBuilder: (context, index) {
-          return Image.network(
-              "https://picsum.photos/id/${ids[index]}/300/300");
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return imagePage(ids[index]);
+              }));
+            },
+            child:
+                Image.network("https://picsum.photos/id/${ids[index]}/300/300"),
+          );
         },
         itemCount: ids.length);
+  }
+}
+
+class imagePage extends StatelessWidget {
+  final String id;
+  imagePage(this.id);
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+      ),
+      backgroundColor: Colors.black,
+      body: Center(child: Image.network('https://picsum.photos/id/$id/600/600')),
+    );
   }
 }
