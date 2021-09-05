@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:security_app/models/Usuario.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 class CreateUser {
-  static String _url = "securityapp-ac.herokuapp.com";
+  static String _url = dotenv.env['API_URL'];
   static String _pathuser = "/api/users";
   static String _pathlogin = "/api/auth/login";
   static String _pathtoken = "/api/auth/token";

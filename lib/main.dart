@@ -4,8 +4,10 @@ import 'package:security_app/pages/loginPages/loginPage.dart';
 import 'package:security_app/pages/loginPages/singupPage.dart';
 import 'package:security_app/pages/loginPages/passwordPage.dart';
 import 'package:security_app/pages/userPages/userPage.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: ".env");
   runApp(MyApp());
 }
 

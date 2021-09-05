@@ -30,6 +30,11 @@ class JsonStorage {
     }
   }
 
+  static Future<String> getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString("jwt");
+  }
+
   static Future<bool> removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final eliminado = await prefs.remove("jwt");

@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:security_app/controller/imagesController.dart';
 import 'package:security_app/pages/startPage.dart';
 import 'package:http/http.dart' as http;
+import 'package:security_app/storage/jwtstorage.dart';
 
 class GalleryPage extends StatefulWidget {
   GalleryPage({Key key}) : super(key: key);
@@ -33,12 +35,12 @@ class Gallery extends StatefulWidget {
 
 class _GalleryState extends State<Gallery> {
   bool loading;
-  List<String> ids;
+  List<dynamic> images_url;
 
   @override
   void initState() {
     loading = true;
-    ids = [];
+    images_url = [];
 
     _loadImages();
 
@@ -46,16 +48,10 @@ class _GalleryState extends State<Gallery> {
   }
 
   void _loadImages() async {
-    final response =
-        await http.get(Uri.parse(('https://picsum.photos/v2/list')));
-    final json = jsonDecode(response.body);
-    List<String> _ids = [];
-    for (var image in json) {
-      _ids.add(image['id']);
-    }
+    final _urls = await ImagesController.getImages(await JsonStorage.getToken());
     setState(() {
       loading = false;
-      ids = _ids;
+      images_url = _urls;
     });
   }
 
@@ -73,30 +69,29 @@ class _GalleryState extends State<Gallery> {
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return imagePage(ids[index]);
+                return imagePage(images_url[index]);
               }));
             },
             child:
-                Image.network("https://picsum.photos/id/${ids[index]}/300/300"),
+                Image.network(images_url[index]),
           );
         },
-        itemCount: ids.length);
+        itemCount: images_url.length);
   }
 }
 
 class imagePage extends StatelessWidget {
-  final String id;
-  imagePage(this.id);
+  final String url;
+  imagePage(this.url);
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.black,
-      body: Center(child: Image.network('https://picsum.photos/id/$id/600/600')),
+      body: Center(child: Image.network(url)),
     );
   }
 }
