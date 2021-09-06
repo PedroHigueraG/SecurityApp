@@ -18,6 +18,7 @@ class _GalleryPageState extends State<GalleryPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: negroAzul,
         appBar: AppBar(
           title: Text("Galería de fotos"),
           backgroundColor: azulOscuro,
@@ -48,7 +49,8 @@ class _GalleryState extends State<Gallery> {
   }
 
   void _loadImages() async {
-    final _urls = await ImagesController.getImages(await JsonStorage.getToken());
+    final _urls =
+        await ImagesController.getImages(await JsonStorage.getToken());
     setState(() {
       loading = false;
       images_url = _urls;
@@ -72,8 +74,10 @@ class _GalleryState extends State<Gallery> {
                 return imagePage(images_url[index]);
               }));
             },
-            child:
-                Image.network(images_url[index]),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.network(images_url[index]),
+            ),
           );
         },
         itemCount: images_url.length);
