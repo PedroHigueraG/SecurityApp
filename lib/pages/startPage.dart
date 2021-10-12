@@ -1,6 +1,11 @@
 import 'dart:async';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:security_app/storage/jwtstorage.dart';
+
+import '../main.dart';
 
 Color azulClaro = new Color(0xff5ac7ff);
 Color azulOscuro = new Color(0xff0c3249);
@@ -23,6 +28,39 @@ class _StartPageState extends State<StartPage>
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
     Timer(Duration(milliseconds: 500), () => _controller.forward());
+
+/*        FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage message) {
+      if (message != null) {
+        //jiji
+      }
+    });
+*/
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification notification = message.notification;
+      AndroidNotification android = message.notification?.android;
+      if (notification != null && android != null && !kIsWeb) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                // TODO add a proper drawable resource to android, for now using
+                //      one that already exists in example app.
+                icon: 'launch_background',
+              ),
+            ));
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+      //jiji
+    });
   }
 
   @override
@@ -46,9 +84,12 @@ class _StartPageState extends State<StartPage>
             FadeTransition(
               opacity: _animation,
               child: Container(
-                child: Image(image: AssetImage('assets/img/Trazado.png'),width: MediaQuery.of(context).copyWith().size.width,fit: BoxFit.cover,),
+                child: Image(
+                  image: AssetImage('assets/img/Trazado.png'),
+                  width: MediaQuery.of(context).copyWith().size.width,
+                  fit: BoxFit.cover,
+                ),
                 alignment: Alignment.bottomCenter,
-                
               ),
             ),
             Column(
@@ -113,6 +154,9 @@ class _StartPageState extends State<StartPage>
                       minWidth: 150.0,
                       height: 60.0,
                       onPressed: () async {
+                        String token =
+                            await FirebaseMessaging.instance.getToken();
+                        print(token);
                         if (await JsonStorage.authToken()) {
                           Navigator.pushNamed(context, '/pages/userPage');
                         } else {
