@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:security_app/pages/startPage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Color botonPrincipal = new Color(0xff9e9e9e);
 bool statusBoton = false;
-Icon iconoBoton = new Icon(Icons.lock_open, size: 80,);
+Icon iconoBoton = new Icon(
+  Icons.lock_open,
+  size: 80,
+);
 
 class PrincipalPage extends StatefulWidget {
   PrincipalPage({Key key}) : super(key: key);
@@ -47,19 +51,17 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     setState(() {
                       if (statusBoton) {
                         botonPrincipal = new Color(0xff9e9e9e);
-                        iconoBoton = new Icon(Icons.lock_open,size: 80);
+                        iconoBoton = new Icon(Icons.lock_open, size: 80);
                         statusBoton = false;
                       } else {
                         botonPrincipal = azulClaro;
-                        iconoBoton = new Icon(Icons.lock_outline,size: 80);
+                        iconoBoton = new Icon(Icons.lock_outline, size: 80);
                         statusBoton = true;
                       }
                     });
                   },
                   child: Padding(
-                      padding: const EdgeInsets.all(50),
-                      child: iconoBoton
-                  ),
+                      padding: const EdgeInsets.all(50), child: iconoBoton),
                 ),
                 Center(
                   child: Padding(
@@ -67,10 +69,21 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     child: Text(
                       'Oprima el botón para encender o apagar el sistema de seguridad',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white
-                      ),
+                      style: TextStyle(fontSize: 25, color: Colors.white),
+                    ),
+                  ),
+                ),
+                MaterialButton(
+                  color: azulClaro,
+                  onPressed: () async {
+                    launch('tel://123');
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Icon(
+                      Icons.phone,
+                      color: Colors.white,
+                      size: 30,
                     ),
                   ),
                 )
